@@ -1,0 +1,33 @@
+server:
+  servlet:
+    context-path: /api/v1
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/shopping_cart
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  profiles:
+    active: test
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger
+    use-root-path: true
+    try-it-out-enabled: true
+    disable-swagger-default-url: true
+
+
+
+
+
