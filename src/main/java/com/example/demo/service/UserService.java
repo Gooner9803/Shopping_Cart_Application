@@ -27,20 +27,20 @@ public class UserService {
     private final PasswordEncoder encoder;
 
 
-    public List<UserDto> getAll(){
+    public List<UserDto> getAll() {
         return repository.findAll().stream()
                 .map(mapper::mapToDto)
                 .collect(Collectors.toList());
     }
 
-    public UserDto getById(UUID id){
+    public UserDto getById(UUID id) {
         User user = repository.findById(id)
                 .orElseThrow(UserNotFoundException::new);
 
         return mapper.mapToDto(user);
     }
 
-    public UserDto create(UserDto userDto){
+    public UserDto create(UserDto userDto) {
         validator.validateCreation(userDto);
         User user = repository.save(mapper.mapToEntity(userDto));
         user.setName(encoder.encode(user.getName()));
@@ -48,20 +48,20 @@ public class UserService {
         return mapper.mapToDto(user);
     }
 
-    public UserDto update(UserDto userDto){
+    public UserDto update(UserDto userDto) {
         validator.validateUpdate(userDto);
         User user = repository.save(mapper.mapToEntity(userDto));
 
         return mapper.mapToDto(user);
     }
 
-    public void deleteById(UUID id){
+    public void deleteById(UUID id) {
         validator.validateRemoval(id);
 
         repository.deleteById(id);
     }
 
-    public User findById(UUID id){
+    public User findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(UserNotFoundException::new);
     }

@@ -25,13 +25,13 @@ public class ProductService {
     private final ProductMapper mapper;
     private final ProductValidator validator;
 
-    public List<ProductDto> getAll(){
+    public List<ProductDto> getAll() {
         return repository.findAll().stream()
                 .map(mapper::mapToDto)
                 .collect(Collectors.toList());
     }
 
-    public List<ProductDto> getByIdAndReceiveSuggestions(UUID id){
+    public List<ProductDto> getByIdAndReceiveSuggestions(UUID id) {
         List<ProductDto> products = new ArrayList<>();
         Product product = repository.findById(id)
                 .orElseThrow(ProductNotFoundException::new);
@@ -42,7 +42,7 @@ public class ProductService {
         return products;
     }
 
-    public ProductDto create(ProductDto productDto){
+    public ProductDto create(ProductDto productDto) {
         validator.validateProduct(productDto);
 
         Product product = mapper.mapToEntity(productDto);
@@ -53,7 +53,7 @@ public class ProductService {
     }
 
 
-    public ProductDto update(ProductDto productDto){
+    public ProductDto update(ProductDto productDto) {
         validator.validateProductForUpdate(productDto);
 
         Product product = mapper.mapToEntity(productDto);
@@ -65,24 +65,24 @@ public class ProductService {
         return mapper.mapToDto(productToUpdate);
     }
 
-    public void delete(UUID id){
+    public void delete(UUID id) {
         validator.validateExistence(id);
 
         repository.deleteById(id);
     }
 
-    public Product findById(UUID id){
+    public Product findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(ProductNotFoundException::new);
     }
 
-    public void adjustCountInStock(Product product, int count){
+    public void adjustCountInStock(Product product, int count) {
         product.setCountInStock(product.getCountInStock() + count);
 
         repository.save(product);
     }
 
-    private Product updateFields(Product product, Product productToUpdate){
+    private Product updateFields(Product product, Product productToUpdate) {
         return productToUpdate.toBuilder()
                 .name(product.getName())
                 .description(product.getDescription())
@@ -91,14 +91,14 @@ public class ProductService {
                 .build();
     }
 
-    private List<ProductDto> getSuggestions(Product product){
+    private List<ProductDto> getSuggestions(Product product) {
         Double price = product.getPrice();
         List<ProductDto> suggestions = repository.findByTypeAndPriceBetween(product.getType(),
-                        price - 1.2 * price, price + 1.2 * price ).stream()
+                        price - 0.2 * price, price + 0.2 * price).stream()
                 .filter(p -> p.getId() != product.getId())
                 .map(mapper::mapToDto)
                 .collect(Collectors.toList());
-        suggestions.forEach(p -> p.setName(p.getName() + " (Suggested)" ));
+        suggestions.forEach(p -> p.setName(p.getName() + " (Suggested)"));
 
         return suggestions;
     }
