@@ -1,4 +1,4 @@
-package com.example.demo.persistance;
+package com.example.demo.persistance.user;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

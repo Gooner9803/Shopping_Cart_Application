@@ -1,6 +1,6 @@
 package com.example.demo.security.user;
 
-import com.example.demo.persistance.User;
+import com.example.demo.persistance.user.User;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

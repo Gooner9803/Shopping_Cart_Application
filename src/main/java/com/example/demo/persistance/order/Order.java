@@ -1,6 +1,6 @@
 package com.example.demo.persistance.order;
 
-import com.example.demo.persistance.User;
+import com.example.demo.persistance.user.User;
 import com.example.demo.persistance.product.Product;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;

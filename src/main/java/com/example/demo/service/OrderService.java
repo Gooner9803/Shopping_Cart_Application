@@ -22,10 +22,13 @@ public class OrderService {
     private final OrderMapper mapper;
     private final OrderValidator validator;
 
+    private final ProductService productService;
+    private final UserService userService;
+
     public OrderDto place(OrderDto orderDto){
-        validator.validateOrder(orderDto);
-        Order order = mapper.mapToEntity(orderDto,validator.validateAndGetCustomerId(orderDto.getCustomerId()),
-                validator.validateAndGetProductId(orderDto.getProductId()));
+        validator.validateOrderForPlacing(orderDto);
+        Order order = mapper.mapToEntity(orderDto, userService.findById(orderDto.getCustomerId()),
+                productService.findById(orderDto.getProductId()));
         repository.save(order);
 
         return mapper.mapToDto(order);
@@ -34,9 +37,9 @@ public class OrderService {
     public OrderDto reply(UUID id, OrderStatus status){
         Order order = repository.findById(id)
                         .orElseThrow(OrderNotFoundException::new);
-        validator.validateOrder(mapper.mapToDto(order));
-        validator.validateStatusForReplying(status);
+        validator.validateOrderForReplying(mapper.mapToDto(order));
         order.setStatus(status);
+        productService.adjustCountInStock(order.getProduct(), -order.getOrderedQuantity());
         repository.save(order);
 
         return mapper.mapToDto(order);

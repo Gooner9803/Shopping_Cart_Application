@@ -3,7 +3,7 @@ package com.example.demo.mapper;
 import com.example.demo.dto.OrderDto;
 import com.example.demo.exception.ProductNotFoundException;
 import com.example.demo.exception.UserNotFoundException;
-import com.example.demo.persistance.User;
+import com.example.demo.persistance.user.User;
 import com.example.demo.persistance.order.Order;
 import com.example.demo.persistance.product.Product;
 import org.mapstruct.Mapper;

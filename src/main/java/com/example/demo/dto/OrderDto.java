@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 import com.example.demo.persistance.order.OrderStatus;
+import com.example.demo.validation.constraint.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class OrderDto {
     private UUID id;
 
     @NotNull
+    @Customer
     private UUID customerId;
 
     @NotNull

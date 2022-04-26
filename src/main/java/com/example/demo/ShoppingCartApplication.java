@@ -1,7 +1,7 @@
 package com.example.demo;
 
-import com.example.demo.persistance.Role;
-import com.example.demo.persistance.User;
+import com.example.demo.persistance.user.Role;
+import com.example.demo.persistance.user.User;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;

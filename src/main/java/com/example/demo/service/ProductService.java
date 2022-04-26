@@ -71,6 +71,17 @@ public class ProductService {
         repository.deleteById(id);
     }
 
+    public Product findById(UUID id){
+        return repository.findById(id)
+                .orElseThrow(ProductNotFoundException::new);
+    }
+
+    public void adjustCountInStock(Product product, int count){
+        product.setCountInStock(product.getCountInStock() + count);
+
+        repository.save(product);
+    }
+
     private Product updateFields(Product product, Product productToUpdate){
         return productToUpdate.toBuilder()
                 .name(product.getName())
@@ -82,8 +93,8 @@ public class ProductService {
 
     private List<ProductDto> getSuggestions(Product product){
         Double price = product.getPrice();
-        List<ProductDto> suggestions = repository.findByTypeOrPriceBetween(product.getType(),
-                        price - 1.1 * price, price + 1.1 * price ).stream()
+        List<ProductDto> suggestions = repository.findByTypeAndPriceBetween(product.getType(),
+                        price - 1.2 * price, price + 1.2 * price ).stream()
                 .filter(p -> p.getId() != product.getId())
                 .map(mapper::mapToDto)
                 .collect(Collectors.toList());

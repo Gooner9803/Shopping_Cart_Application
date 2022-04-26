@@ -1,7 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.dto.UserDto;
-import com.example.demo.persistance.User;
+import com.example.demo.persistance.user.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -2,15 +2,15 @@ package com.example.demo.validation;
 
 import com.example.demo.dto.UserDto;
 import com.example.demo.exception.UserNotFoundException;
-import com.example.demo.persistance.Role;
-import com.example.demo.persistance.User;
+import com.example.demo.persistance.user.Role;
+import com.example.demo.persistance.user.User;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-import static com.example.demo.persistance.Role.ADMIN;
+import static com.example.demo.persistance.user.Role.ADMIN;
 
 @Component
 @RequiredArgsConstructor

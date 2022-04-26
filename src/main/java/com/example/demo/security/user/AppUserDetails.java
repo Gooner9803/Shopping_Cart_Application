@@ -1,6 +1,6 @@
 package com.example.demo.security.user;
 
-import com.example.demo.persistance.User;
+import com.example.demo.persistance.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

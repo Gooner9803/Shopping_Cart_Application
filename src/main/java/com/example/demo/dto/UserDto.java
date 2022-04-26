@@ -2,9 +2,10 @@ package com.example.demo.dto;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
-import com.example.demo.persistance.Role;
+import com.example.demo.persistance.user.Role;
 import com.example.demo.validation.constraint.Age;
 import com.example.demo.validation.constraint.Name;
+import com.example.demo.validation.constraint.ValidPassword;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,6 +45,7 @@ public class UserDto {
     private String email;
 
     @NotNull
+    @ValidPassword
     @JsonInclude(value = NON_NULL)
     private String password;
 }

@@ -1,5 +1,6 @@
-package com.example.demo.persistance;
+package com.example.demo.persistance.user;
 
+import com.example.demo.persistance.user.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,8 +22,7 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO /*generator = "uuid"*/)
-    @GenericGenerator(name = "uuid", strategy= "uuid2")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, columnDefinition = "VARCHAR(36)")
     @Type(type = "uuid-char")
     private UUID id;

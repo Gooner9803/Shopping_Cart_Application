@@ -36,7 +36,7 @@ public class ProductController {
     }
 
     @Operation(summary = "Returns product by id and suggestions that have same type as the product " +
-            "or the difference of their prices is 20%.")
+            "and the difference of their prices is 20%.")
     @GetMapping("/{id}")
     public ResponseEntity<List<ProductDto>> getByIdAndReceiveSuggestions(@PathVariable UUID id){
         return ResponseEntity.ok().body(service.getByIdAndReceiveSuggestions(id));
